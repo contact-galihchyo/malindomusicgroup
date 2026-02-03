@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="icons/logomg.svg">
+<title>Syarat & Ketentuan | Malindo Music Group</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eaf3ff,#ffffff);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR (SAMA DENGAN SERVICE) ===== */
+.navbar{
+  max-width:1200px;
+  margin:30px auto 0;
+  padding:18px 40px;
+  background:#ffffff;
+  border-radius:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  position:relative;
+}
+
+.logo{
+  font-weight:700;
+  font-size:20px;
+  color:#2563eb;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+}
+
+nav a{
+  margin-right:22px;
+  text-decoration:none;
+  font-size:14px;
+  color:#334155;
+}
+
+.join-btn{
+  background:#3b82f6;
+  color:#fff;
+  padding:8px 18px;
+  border-radius:999px;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  display:none;
+  width:32px;
+  height:24px;
+  position:relative;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:#2563eb;
+  border-radius:4px;
+  transition:.3s;
+}
+
+.menu-toggle span:nth-child(1){top:0}
+.menu-toggle span:nth-child(2){top:10px}
+.menu-toggle span:nth-child(3){top:20px}
+
+.menu-toggle.active span:nth-child(1){
+  transform:rotate(45deg);
+  top:10px;
+}
+.menu-toggle.active span:nth-child(2){opacity:0}
+.menu-toggle.active span:nth-child(3){
+  transform:rotate(-45deg);
+  top:10px;
+}
+
+@media(max-width:768px){
+  .menu-toggle{display:block;margin-right:18px}
+
+  nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(14px);
+    border-radius:0 0 22px 22px;
+    flex-direction:column;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+
+  nav.active{max-height:500px}
+
+  nav a{
+    margin:16px 0;
+    font-size:15px;
+  }
+}
+
+/* ===== CONTENT ===== */
+.container{
+  max-width:900px;
+  margin:60px auto 80px;
+  background:#fff;
+  padding:40px;
+  border-radius:22px;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+h2{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#64748b;
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+.section h4{
+  margin-top:24px;
+  color:#1e293b;
+}
+
+.section ul{
+  margin-top:10px;
+  padding-left:22px;
+}
+
+.section li{
+  margin-bottom:6px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.agree-box{
+  margin-top:40px;
+  padding:20px;
+  border:1px solid #c7d2fe;
+  border-radius:14px;
+  background:#f8fafc;
+}
+
+.agree-box label{
+  display:flex;
+  gap:12px;
+  font-size:14px;
+  cursor:pointer;
+}
+
+button{
+  margin-top:30px;
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:999px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  opacity:.6;
+}
+
+button.active{
+  opacity:1;
+}
+
+.footer-note{
+  margin-top:20px;
+  font-size:12px;
+  color:#64748b;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="nav-left">
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Service</a>
+      <a href="mission.html">Mission</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="syarat-ketentuan.html" class="join-btn">Join</a>
+    </nav>
+  </div>
+
+  <div class="logo">Malindo Music Group</div>
+</header>
+
+<div class="container">
+  <h2>Syarat & Ketentuan Artist</h2>
+  <p class="subtitle">Harap membaca dengan seksama sebelum melanjutkan</p>
+
+  <div class="section">
+    <h4>1. Distribusi Musik</h4>
+    <ul>
+        <li>Lagu original</li>
+        <li>Remix (Vocal / Mashup / Drop Melody)</li>
+        <li>Remix atau cover dengan izin tertulis dan bermaterai</li>
+        <li>Vocal dari katalog resmi perusahaan</li>
+    </ul>
+    <h4>2. Durasi Lagu</h4>
+    <ul>
+        <li>Minimal 3 menit 30 detik</li>
+        <li>Maksimal 7 menit</li>
+    </ul>
+    <h4>3. File Audio</h4>
+    <ul>
+        <li>Belum pernah dirilis di platform mana pun</li>
+        <li>Bukan hasil plagiarisme atau pelanggaran hak cipta</li>
+        <li>Merupakan karya asli (original / remix / cover berizin)</li>
+        <li>Format audio: WAV (16-bit / 44.100 Hz)</li>
+    </ul>
+    <h4>4. Hak Cipta</h4>
+    <ul>
+        <li>File audio harus bebas klaim hak cipta</li>
+        <li>Wajib dilakukan pengecekan Copyright (CR) sebelum rilis</li>
+    </ul>
+    <h4>5. Artwork / Cover Art</h4>
+    <ul> 
+        <li>Ukuran: 3000 x 3000 pixel</li>
+        <li>Format: JPG</li>
+        <li>Judul lagu harus sesuai dengan judul vocal/acapella</li>
+    </ul>
+    <h4>6. Kewajiban Artist</h4>
+    <ul>
+        <li>Wajib melakukan promosi minimal 3 kali dalam 1 minggu</li>
+        <li>Bertanggung jawab penuh atas seluruh materi rilisan</li>
+    </ul>
+    <h4>7. Claim, Takedown & OAC</h4>
+    <ul>
+        <li>Pengajuan Claim dan Unclaim tidak dipungut biaya</li>
+        <li>Takedown dikenakan biaya operasional Rp150.000 per lagu</li>
+        <li>Pengajuan Official Artist Channel (OAC) tidak dipungut biaya</li>
+    </ul> 
+    <h4>8. Metadata</h4>
+    <ul>
+        <li>Seluruh data wajib diisi dengan benar dan lengkap</li>
+        <li>Composer diisi menggunakan nama asli jika pencipta tidak diketahui</li>
+    </ul>
+  </div>
+
+  <div class="agree-box">
+    <label>
+      <input type="checkbox" id="agree">
+      <span>Saya telah membaca dan menyetujui Syarat & Ketentuan</span>
+    </label>
+  </div>
+
+  <button id="nextBtn" onclick="lanjut()">Lanjut Ke Register</button>
+
+  <p class="footer-note">© PT Malindo Music Group</p>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navbar").classList.toggle("active");
+  document.getElementById("menuToggle").classList.toggle("active");
+}
+
+const checkbox = document.getElementById("agree");
+const btn = document.getElementById("nextBtn");
+
+checkbox.addEventListener("change", () => {
+  btn.classList.toggle("active", checkbox.checked);
+});
+
+function lanjut(){
+  if(!checkbox.checked){
+    alert("Harap setujui syarat & ketentuan terlebih dahulu");
+    return;
+  }
+  localStorage.setItem("agreeTerms","true");
+  window.location.href = "join.html";
+}
+</script>
+
+</body>
+</html>

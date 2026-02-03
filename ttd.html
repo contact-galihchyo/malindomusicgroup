@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="icons/logomg.svg">
+<title>Kontrak Artist| Malimdo Music Group</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eaf3ff,#ffffff);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  max-width:1100px;
+  margin:30px auto 0;
+  padding:18px 40px;
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.logo{
+  font-weight:700;
+  font-size:20px;
+  color:#2563eb;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  max-width:900px;
+  margin:40px auto 80px;
+  background:#fff;
+  padding:40px;
+  border-radius:22px;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+h2{text-align:center}
+.subtitle{
+  text-align:center;
+  color:#64748b;
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+/* ===== WEB WRAPPER ===== */
+.wrapper{
+  max-width:900px;
+  margin:40px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+}
+
+/* ===== PDF AREA ===== */
+#pdfArea{
+  width:210mm;
+  height:auto;
+  background:#fff;
+  padding:25mm;
+  color:#000;
+}
+
+/* PDF STYLE */
+.center{text-align:center}
+
+hr{
+  margin:16px 0;
+  border:0;
+  border-top:1px solid #999;
+}
+
+.identity{
+  border:1px solid #999;
+  padding:12px;
+  margin:16px 0;
+  font-size:14px;
+}
+
+.signature img{
+  width:180px;
+}
+
+/* ===== CANVAS ===== */
+canvas{
+  width:100%;
+  height:180px;
+  border:2px dashed #2563eb;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+/* BUTTON */
+button{
+  padding:14px;
+  border:none;
+  border-radius:999px;
+  width:100%;
+  margin-top:20px;
+  font-weight:bold;
+  background:#2563eb;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* PRINT FIX */
+@media print{
+  body{background:#fff}
+  .navbar,.container,canvas,button,.label{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- PDF -->
+<div id="pdfArea">
+
+<h3 class="center">SURAT PERNYATAAN & TANDA TANGAN KONTRAK</h3>
+
+<div class="center">
+  <b>PT MALINDO MUSIC GROUP</b><br>
+  <small>Music Distribution & Artist Management</small>
+</div>
+
+<hr>
+
+<div class="identity">
+<b>Identitas Artist</b><br><br>
+Nama Artist : <span id="artist"></span><br>
+Nama Lengkap : <span id="fullName"></span><br>
+NIK : <span id="nik"></span><br>
+Alamat : <span id="jalan"></span><br>
+Kecamatan : <span id="kecamatan"></span><br>
+Kota : <span id="kota"></span><br>
+Provinsi : <span id="provinsi"></span><br>
+No Telp : <span id="phone"></span>
+</div>
+
+<p style="font-size:14px;line-height:1.6">
+Dengan ini saya menyatakan bahwa seluruh data yang saya kirimkan adalah benar dan saya
+<b>MENYETUJUI</b> seluruh syarat dan ketentuan serta bersedia bergabung dan merilis karya
+di bawah naungan <b>Malindo Music Group</b>.
+</p>
+
+<br><br>
+
+<div class="signature">
+<b>Tanda Tangan Artist</b><br>
+<img id="signatureImage"><br>
+<span id="signatureDate"></span>
+<div style="border-top:1px solid #000;width:200px;margin-top:5px"></div>
+</div>
+
+</div>
+<!-- END PDF -->
+
+<canvas id="signature"></canvas>
+
+<button onclick="submitTTD()">Setuju & Download PDF</button>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+const artistData = JSON.parse(localStorage.getItem("artistData")) || {
+  fullname:"Contoh Nama",
+  nik:"1234567890",
+  address:"Contoh Alamat",
+  phone:"08xxxxxxxx"
+};
+
+artist.innerText = artistData.artist;
+fullName.innerText = artistData.fullname;
+nik.innerText = artistData.nik;
+jalan.innerText = artistData.jalan;
+kecamatan.innerText = artistData.kecamatan;
+kota.innerText = artistData.kota;
+provinsi.innerText = artistData.provinsi;
+phone.innerText = artistData.phone;
+
+/* SIGNATURE */
+const canvas = document.getElementById("signature");
+const signaturePad = new SignaturePad(canvas);
+
+function resize(){
+  const ratio = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * ratio;
+  canvas.height = canvas.offsetHeight * ratio;
+  canvas.getContext("2d").scale(ratio, ratio);
+}
+resize();
+window.addEventListener("resize", resize);
+
+function submitTTD(){
+  if(signaturePad.isEmpty()){
+    alert("Tanda tangan belum diisi");
+    return;
+  }
+
+  const img = document.getElementById("signatureImage");
+  img.src = signaturePad.toDataURL("image/png");
+
+  signatureDate.innerText =
+    "Tanggal: " + new Date().toLocaleDateString("id-ID");
+
+  img.onload = () => {
+
+    // GENERATE PDF
+    html2pdf().from(document.getElementById("pdfArea")).set({
+      filename:`Kontrak_${artistData.fullname}.pdf`,
+      jsPDF:{unit:"mm",format:"a4"},
+      html2canvas:{scale:2},
+    }).save().then(() => {
+
+      // === WHATSAPP CONFIRMATION ===
+      const adminWA = "6282299495064"; // GANTI NOMOR ADMIN
+      const message = 
+`Halo Admin Malindo Music Group,
+
+Saya telah mengisi formulir pendaftaran artist serta menyetujui seluruh ketentuan kerja sama.
+
+Nama Lengkap : ${artistData.fullname}
+Nama Artist  : ${artistData.artist}
+WhatsApp     : ${artistData.phone}
+
+Dengan ini saya menyatakan bersedia bergabung dan merilis karya
+di bawah naungan *Malindo Music Group*.
+
+Hormat saya,
+${artistData.fullname}`
+
+.trim();
+      const waURL =
+        "https://wa.me/" + adminWA +
+        "?text=" + encodeURIComponent(message);
+
+      // buka WA setelah PDF ke-download
+      window.open(waURL, "_blank");
+    });
+  };
+}
+</script>
+
+</body>
+</html>

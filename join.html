@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="icons/logomg.svg">
+<title>Join Artist | Malindo Music Group</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eaf3ff,#ffffff);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  max-width:1200px;
+  margin:30px auto 0;
+  padding:18px 40px;
+  background:#ffffff;
+  border-radius:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  position:relative;
+}
+
+.logo{
+  font-weight:700;
+  font-size:20px;
+  color:#2563eb;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+}
+
+nav a{
+  margin-right:22px;
+  text-decoration:none;
+  font-size:14px;
+  color:#334155;
+}
+
+.join-btn{
+  background:#3b82f6;
+  color:#fff;
+  padding:8px 18px;
+  border-radius:999px;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  display:none;
+  width:32px;
+  height:24px;
+  position:relative;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:#2563eb;
+  border-radius:4px;
+  transition:.3s;
+}
+
+.menu-toggle span:nth-child(1){top:0}
+.menu-toggle span:nth-child(2){top:10px}
+.menu-toggle span:nth-child(3){top:20px}
+
+.menu-toggle.active span:nth-child(1){
+  transform:rotate(45deg);
+  top:10px;
+}
+.menu-toggle.active span:nth-child(2){opacity:0}
+.menu-toggle.active span:nth-child(3){
+  transform:rotate(-45deg);
+  top:10px;
+}
+
+@media(max-width:768px){
+  .menu-toggle{display:block;margin-right:18px}
+
+  nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(14px);
+    border-radius:0 0 22px 22px;
+    flex-direction:column;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+
+  nav.active{max-height:500px}
+
+  nav a{
+    margin:16px 0;
+    font-size:15px;
+  }
+}
+
+
+/* ===== FORM ===== */
+.container{
+  max-width:820px;
+  margin:40px auto 80px;
+  background:#fff;
+  padding:40px;
+  border-radius:22px;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+h2{text-align:center;margin-bottom:6px}
+.subtitle{text-align:center;color:#64748b;font-size:14px;margin-bottom:30px}
+
+.section{margin-bottom:28px}
+.section h3{color:#2563eb;margin-bottom:14px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1.5px solid #c7d2fe;
+  font-size:14px;
+}
+
+input.valid{border-color:#16a34a}
+input.invalid{border-color:#dc2626}
+
+.hint{font-size:12px;color:#94a3b8}
+.hint.valid{color:#16a34a}
+.hint.invalid{color:#dc2626}
+
+.submit-btn{
+  width:100%;
+  margin-top:24px;
+  padding:16px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  opacity:.6;
+  transition:.3s;
+}
+
+.submit-btn:disabled{
+  cursor:not-allowed;
+}
+
+/* ===== LOADING ===== */
+.submit-btn.loading{
+  pointer-events:none;
+  opacity:0.85;
+}
+
+.spinner{
+  width:18px;
+  height:18px;
+  border:3px solid rgba(255,255,255,.4);
+  border-top:3px solid #fff;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  display:inline-block;
+  vertical-align:middle;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* ===== SUCCESS ===== */
+.success-box{
+  display:none;
+  margin-top:24px;
+  padding:16px;
+  border-radius:14px;
+  background:#ecfdf5;
+  color:#16a34a;
+  font-weight:600;
+  text-align:center;
+
+  opacity:0;
+  transform:translateY(10px);
+}
+
+.success-box.show{
+  display:block;
+  animation:fadeSuccess .6s ease forwards;
+}
+
+@keyframes fadeSuccess{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+/* ===== WHATSAPP BUTTON ===== */
+.wa-btn{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:999px;
+  background:#22c55e;
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  text-align:center;
+  transition:.3s;
+}
+
+.wa-btn:hover{
+  background:#16a34a;
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="nav-left">
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+     <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Service</a>
+      <a href="mission.html">Mission</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="syarat-ketentuan.html" class="join-btn">Join</a>
+    </nav>
+  </div>
+
+  <div class="logo">Malindo Music Group</div>
+</header>
+
+
+<div class="container">
+<h2>Join as Artist</h2>
+<p class="subtitle">Isi data dengan benar untuk pendaftaran artist</p>
+
+<form id="joinForm">
+
+<!-- DATA ARTIST -->
+<div class="section">
+<h3>Data Artist</h3>
+<div class="grid">
+
+<div>
+  <input id="artist" name="artist" placeholder="Nama Artist">
+  <small id="artistHint" class="hint">Minimal 3 karakter</small>
+</div>
+
+<div>
+  <input id="fullname" name="fullname" placeholder="Nama Lengkap">
+  <small id="fullnameHint" class="hint">Sesuai identitas resmi</small>
+</div>
+
+<div>
+  <input id="nik" name="nik" placeholder="NIK KTP" maxlength="16">
+  <small id="nikHint" class="hint">16 digit angka</small>
+</div>
+
+<div>
+  <input id="phone" name="phone" placeholder="Nomor Telepon / WhatsApp">
+  <small id="phoneHint" class="hint">08xxxxxxxxxx</small>
+</div>
+
+<div>
+  <input id="youtube" name="youtube" placeholder="Link Channel YouTube">
+  <small id="youtubeHint" class="hint">Gunakan https://</small>
+</div>
+
+</div>
+</div>
+
+<!-- ALAMAT -->
+<div class="section">
+<h3>Alamat Lengkap</h3>
+<div class="grid">
+
+<div>
+  <input id="jalan" name="jalan" placeholder="Alamat Jalan">
+  <small id="jalanHint" class="hint">Minimal 5 karakter</small>
+</div>
+
+<div>
+  <input id="kecamatan" name="kecamatan" placeholder="Kecamatan">
+  <small id="kecamatanHint" class="hint">Wajib diisi</small>
+</div>
+
+<div>
+  <input id="kota" name="kota" placeholder="Kota / Kabupaten">
+  <small id="kotaHint" class="hint">Wajib diisi</small>
+</div>
+
+<div>
+  <input id="provinsi" name="provinsi" placeholder="Provinsi">
+  <small id="provinsiHint" class="hint">Wajib diisi</small>
+</div>
+
+</div>
+</div>
+
+<!-- PEMBAYARAN -->
+<div class="section">
+<h3>Pembayaran Royalti</h3>
+<div class="grid">
+
+<div>
+  <input id="bank" name="bank" placeholder="Nama Bank / E-Wallet">
+  <small id="bankHint" class="hint">Contoh: BCA, Dana</small>
+</div>
+
+<div>
+  <input id="rekening" name="rekening" placeholder="Nomor Rekening">
+  <small id="rekeningHint" class="hint">Pastikan Valid</small>
+</div>
+
+<div>
+  <input id="an" name="an" placeholder="Atas Nama Rekening">
+  <small id="anHint" class="hint">Nama pemilik rekening</small>
+</div>
+
+</div>
+</div>
+
+<button class="submit-btn" id="submitBtn" disabled>Register</button>
+
+<div class="success-box" id="successBox">
+  ✅ Pendaftaran berhasil dikirim
+</div>
+
+</form>
+</div>
+
+<script>
+  if(localStorage.getItem("agreeTerms") !== "true"){
+  window.location.href = "syarat-ketentuan.html";
+}
+// ===== MENU MOBILE =====
+function toggleMenu(){
+  document.getElementById("navbar").classList.toggle("active");
+  document.getElementById("menuToggle").classList.toggle("active");
+}
+
+// ===== KONFIGURASI =====
+const ADMIN_WA = "6282299495064"; // GANTI NOMOR ADMIN
+
+const submitBtn = document.getElementById("submitBtn");
+const form = document.getElementById("joinForm");
+const successBox = document.getElementById("successBox");
+
+// ===== VALIDASI FIELD =====
+const fields = [
+  ["artist",3],
+  ["fullname",3],
+  ["nik","nik"],
+  ["phone","phone"],
+  ["youtube","url"],
+  ["jalan",5],
+  ["kecamatan",3],
+  ["kota",3],
+  ["provinsi",3],
+  ["bank",3],
+  ["rekening",5],
+  ["an",3]
+];
+
+function validate(){
+  let valid = true;
+
+  fields.forEach(([id,rule])=>{
+    const input = document.getElementById(id);
+    const hint  = document.getElementById(id+"Hint");
+    const val   = input.value.trim();
+    let ok = false;
+
+    if(rule==="nik") ok=/^\d{16}$/.test(val);
+    else if(rule==="phone") ok=/^08\d{8,12}$/.test(val);
+    else if(rule==="url") ok=val.startsWith("http");
+    else ok=val.length>=rule;
+
+    input.className = ok ? "valid" : "invalid";
+    hint.className  = "hint " + (ok ? "valid" : "invalid");
+
+    valid = valid && ok;
+  });
+
+  submitBtn.disabled = !valid;
+  submitBtn.style.opacity = valid ? "1" : ".6";
+}
+
+fields.forEach(([id])=>{
+  document.getElementById(id).addEventListener("input", validate);
+});
+
+// ===== SUBMIT FORM =====
+form.addEventListener("submit", e => {
+  e.preventDefault();
+
+  submitBtn.classList.add("loading");
+  submitBtn.innerHTML = `<span class="spinner"></span> Loading...`;
+
+  // ambil data form
+  const formData = Object.fromEntries(new FormData(form).entries());
+
+  // ===== KIRIM KE GOOGLE APPS SCRIPT =====
+  fetch("https://script.google.com/macros/s/AKfycbz9BFiaXFIZYCLs-aTpk_1m7yc8HcHOhsNaZh2seNIexXWua4UUp-z-_gPh2JD1_OCtYg/exec", {
+    method: "POST",
+    body: JSON.stringify(formData)
+  })
+  .then(res => res.json())
+  .then(() => {
+
+    // simpan data form ke browser (buat dipakai di ttd.html)
+    localStorage.setItem("artistData", JSON.stringify(formData));
+
+    // pindah ke halaman tanda tangan
+    window.location.href = "ttd.html";
+
+  })
+  .catch(()=>{
+    alert("Gagal mengirim data. Coba lagi.");
+    submitBtn.innerHTML = "Register";
+    submitBtn.classList.remove("loading");
+  });
+});
+</script>
+
+
+</body>
+</html>

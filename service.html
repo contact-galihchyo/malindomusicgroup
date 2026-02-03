@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="icons/logomg.svg">
+<title>Our Services | Malindo Music Group</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eaf3ff,#ffffff);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR (JANGAN DIUBAH) ===== */
+.navbar{
+  max-width:1200px;
+  margin:30px auto 0;
+  padding:18px 40px;
+  background:#ffffff;
+  border-radius:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  position:relative;
+}
+
+.logo{
+  font-weight:700;
+  font-size:20px;
+  color:#2563eb;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+}
+
+nav a{
+  margin-right:22px;
+  text-decoration:none;
+  font-size:14px;
+  color:#334155;
+}
+
+.join-btn{
+  background:#3b82f6;
+  color:#fff;
+  padding:8px 18px;
+  border-radius:999px;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  display:none;
+  width:32px;
+  height:24px;
+  position:relative;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:#2563eb;
+  border-radius:4px;
+  transition:.3s;
+}
+
+.menu-toggle span:nth-child(1){top:0}
+.menu-toggle span:nth-child(2){top:10px}
+.menu-toggle span:nth-child(3){top:20px}
+
+.menu-toggle.active span:nth-child(1){
+  transform:rotate(45deg);
+  top:10px;
+}
+.menu-toggle.active span:nth-child(2){opacity:0}
+.menu-toggle.active span:nth-child(3){
+  transform:rotate(-45deg);
+  top:10px;
+}
+
+@media(max-width:768px){
+  .menu-toggle{display:block;margin-right:18px}
+
+  nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(14px);
+    border-radius:0 0 22px 22px;
+    flex-direction:column;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+
+  nav.active{max-height:500px}
+
+  nav a{
+    margin:16px 0;
+    font-size:15px;
+  }
+}
+
+/* ===== CONTENT ===== */
+.container{
+  max-width:1100px;
+  margin:120px auto 80px;
+  background:#ffffff;
+  padding:50px;
+  border-radius:24px;
+  box-shadow:0 25px 50px rgba(0,0,0,.12);
+}
+
+.container h1{
+  text-align:center;
+  font-size:30px;
+  color:#0f172a;
+}
+
+.subtitle{
+  text-align:center;
+  margin:14px auto 50px;
+  color:#475569;
+  font-size:15px;
+  max-width:760px;
+}
+
+/* Service Cards */
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:26px;
+}
+
+.service-card{
+  background:#f8fafc;
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 15px 30px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+}
+
+.service-card h3{
+  font-size:18px;
+  color:#2563eb;
+  margin-bottom:12px;
+}
+
+.service-card p{
+  font-size:14px;
+  color:#334155;
+  line-height:1.7;
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="nav-left">
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Service</a>
+      <a href="mission.html">Mission</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="syarat-ketentuan.html" class="join-btn">Join</a>
+    </nav>
+  </div>
+
+  <div class="logo">Malindo Music Group</div>
+</header>
+
+<div class="container">
+  <h1>Our Services</h1>
+  <p class="subtitle">
+    Layanan profesional Malindo Music Group untuk mendukung pertumbuhan
+    artis, musisi, label independen, serta remixer dan artis DJ.
+  </p>
+
+  <div class="services">
+    <div class="service-card">
+      <h3>🎤 Artist Management</h3>
+      <p>
+        Manajemen artis secara profesional untuk membantu pengembangan
+        karier, branding, dan strategi jangka panjang.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3>🎧 Music Distribution</h3>
+      <p>
+        Distribusi karya ke berbagai platform digital secara luas
+        dengan sistem yang transparan dan terstruktur.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3>💼 Label & Independent Support</h3>
+      <p>
+        Dukungan bagi label independen dan kreator mandiri dalam
+        pengelolaan rilis, promosi, dan monetisasi.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3>📊 Monetization & Royalty</h3>
+      <p>
+        Sistem monetisasi dan pengelolaan royalti yang jelas,
+        akurat, dan dapat dipertanggungjawabkan.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3>🎶 DJ & Remix Development</h3>
+      <p>
+        Pengembangan dan pendampingan bagi DJ dan remixer
+        untuk memperluas eksistensi di industri musik digital.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <h3>🌐 Digital Branding & Promotion</h3>
+      <p>
+        Strategi branding dan promosi digital untuk meningkatkan
+        visibilitas dan jangkauan karya kreator.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navbar").classList.toggle("active");
+  document.getElementById("menuToggle").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

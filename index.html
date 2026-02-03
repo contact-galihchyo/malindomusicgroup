@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="icons/logomg.svg">
+<title>Malindo Music Group | Music Label</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#eaf3ff,#ffffff);
+  min-height:100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  max-width:1200px;
+  margin:30px auto 0;
+  padding:18px 40px;
+  background:#fff;
+  border-radius:22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  position:relative;
+  z-index:99;
+}
+
+.logo{
+  font-weight:700;
+  font-size:20px;
+  color:#2563eb;
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+}
+
+nav a{
+  margin-right:22px;
+  text-decoration:none;
+  font-size:14px;
+  color:#334155;
+}
+
+nav a:hover{
+  color:#2563eb;
+}
+
+.join-btn{
+  background:#3b82f6;
+  color:#fff;
+  padding:8px 18px;
+  border-radius:999px;
+  font-size:14px;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle{
+  display:none;
+  width:32px;
+  height:24px;
+  position:relative;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  position:absolute;
+  width:100%;
+  height:3px;
+  background:#2563eb;
+  border-radius:4px;
+  transition:.3s;
+}
+
+.menu-toggle span:nth-child(1){top:0}
+.menu-toggle span:nth-child(2){top:10px}
+.menu-toggle span:nth-child(3){top:20px}
+
+.menu-toggle.active span:nth-child(1){
+  transform:rotate(45deg);
+  top:10px;
+}
+.menu-toggle.active span:nth-child(2){
+  opacity:0;
+}
+.menu-toggle.active span:nth-child(3){
+  transform:rotate(-45deg);
+  top:10px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .menu-toggle{
+    display:block;
+    margin-right:18px;
+  }
+
+  nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(14px);
+    border-radius:0 0 22px 22px;
+    flex-direction:column;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+
+  nav.active{
+    max-height:420px;
+  }
+
+  nav a{
+    margin:16px 0;
+    font-size:15px;
+    text-align:center;
+  }
+}
+
+/* ===== HERO ===== */
+.hero{
+  max-width:1100px;
+  margin:120px auto 0;
+  text-align:center;
+  padding:0 20px;
+}
+
+.hero h1{
+  font-size:42px;
+  color:#0f172a;
+}
+
+.hero h1 span{
+  color:#2563eb;
+}
+
+.hero p{
+  margin-top:16px;
+  font-size:16px;
+  color:#475569;
+}
+
+.hero a{
+  display:inline-block;
+  margin-top:30px;
+  background:#2563eb;
+  color:#fff;
+  padding:14px 36px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:15px;
+  box-shadow:0 15px 30px rgba(37,99,235,.35);
+}
+
+/* ===== PLATFORMS ===== */
+.platforms{
+  max-width:1100px;
+  margin:120px auto 0;
+  padding:0 20px;
+  text-align:center;
+}
+
+.platforms h2{
+  font-size:28px;
+  color:#0f172a;
+  margin-bottom:12px;
+}
+
+.platforms p{
+  color:#475569;
+  font-size:15px;
+  margin-bottom:40px;
+}
+
+.platform-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:24px;
+}
+
+.platform{
+  background:#ffffff;
+  padding:26px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  transition:.3s;
+}
+
+.platform img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+}
+
+.platform span{
+  font-weight:600;
+  color:#2563eb;
+  font-size:14px;
+}
+
+.platform:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* ===== WHY ===== */
+.why{
+  max-width:1100px;
+  margin:120px auto;
+  padding:0 20px;
+}
+
+.why h2{
+  text-align:center;
+  font-size:28px;
+  color:#0f172a;
+  margin-bottom:50px;
+}
+
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:26px;
+}
+
+.why-card{
+  background:#f8fafc;
+  padding:32px;
+  border-radius:22px;
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.why-card h3{
+  color:#2563eb;
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.why-card p{
+  font-size:14px;
+  color:#475569;
+  line-height:1.7;
+}
+
+/* ===== CTA ===== */
+.cta{
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  margin:120px auto 80px;
+  max-width:1100px;
+  border-radius:28px;
+  padding:60px 30px;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 25px 50px rgba(37,99,235,.4);
+}
+
+.cta h2{
+  font-size:30px;
+  margin-bottom:14px;
+}
+
+.cta p{
+  font-size:16px;
+  margin-bottom:30px;
+  opacity:.95;
+}
+
+.cta a{
+  background:#ffffff;
+  color:#2563eb;
+  padding:14px 36px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="nav-left">
+    <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="navbar">
+      <a href="index.html">Home</a>
+      <a href="service.html">Service</a>
+      <a href="mission.html">Mission</a>
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+      <a href="syarat-ketentuan.html" class="join-btn">Join</a>
+    </nav>
+  </div>
+
+  <div class="logo">Malindo Music Group</div>
+</header>
+
+<section class="hero">
+  <h1>Build Your Career with <span>Malindo Music Group</span></h1>
+  <p>Music Label & Artist Management for Digital Distribution, Royalty, and Branding</p>
+  <a href="syarat-ketentuan.html">Join as Artist</a>
+</section>
+
+<section class="platforms">
+  <h2>Distributed To Major Platforms</h2>
+  <p>Karya Anda didistribusikan ke berbagai platform musik digital global</p>
+
+  <div class="platform-grid">
+  <div class="platform">
+    <img src="icons/spotify.svg" alt="Spotify">
+    <span>Spotify</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/apple-music.svg" alt="Apple Music">
+    <span>Apple Music</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/youtube-music.svg" alt="YouTube Music">
+    <span>YouTube Music</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/tiktok.svg" alt="TikTok Music">
+    <span>TikTok Music</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/amazon-music.svg" alt="Amazon Music">
+    <span>Amazon Music</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/meta.svg" alt="Meta Platforms">
+    <span>Meta</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/deezer.svg" alt="Deezer">
+    <span>Deezer</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/soundcloud.svg" alt="SoundCloud">
+    <span>SoundCloud</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/tidal.svg" alt="TIDAL">
+    <span>TIDAL</span>
+  </div>
+
+  <div class="platform">
+    <img src="icons/pandora.svg" alt="Pandora">
+    <span>Pandora</span>
+  </div>
+</div>
+</section>
+
+
+<section class="why">
+  <h2>Why Choose Malindo Music Group</h2>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>🎵 Professional Management</h3>
+      <p>Manajemen artis, musisi, dan DJ secara profesional dan berkelanjutan.</p>
+    </div>
+    <div class="why-card">
+      <h3>📊 Transparent Royalty</h3>
+      <p>Sistem royalti yang jelas, transparan, dan dapat dipertanggungjawabkan.</p>
+    </div>
+    <div class="why-card">
+      <h3>🚀 Career Growth</h3>
+      <p>Fokus pada pertumbuhan karier melalui distribusi dan branding digital.</p>
+    </div>
+    <div class="why-card">
+      <h3>🤝 Creative Ecosystem</h3>
+      <p>Wadah kolaboratif bagi artis, label independen, dan kreator digital.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to Grow Your Music Career?</h2>
+  <p>Bergabung bersama Malindo Music Group dan kembangkan karya Anda secara profesional.</p>
+  <a href="syarat-ketentuan.html">Join as Artist</a>
+</section>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navbar").classList.toggle("active");
+  document.getElementById("menuToggle").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
